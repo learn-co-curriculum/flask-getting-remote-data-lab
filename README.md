@@ -1,69 +1,120 @@
-# Getting Remote Data Lab
+# Flask Get Requester
 
-## The Scenario 
-It is time to practice building out your own class for retrieving remote data. In this lab, you are tasked with building a generic GetRequester class. This class will be able to take in a URL on initialization and send an HTTP GET request on command. You will also need to build a method for dealing with requests that return JSON.
+A reusable Python class for retrieving data from remote APIs using HTTP GET requests. The project demonstrates how to fetch data from a remote endpoint, access the raw response body, and convert JSON responses into Python data structures for use in Flask applications or other Python projects.
 
-## Tools and Resources 
-- [GitHub Repo](https://github.com/learn-co-curriculum/flask-getting-remote-data-lab)
-- [GET - Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)
-- [HTTP methods - Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods)
-- [requests](https://requests.readthedocs.io/en/latest/)
-- [Python JSON](https://docs.python.org/3/library/json.html)
+## Features
 
-## Instructions
+* Send HTTP GET requests to a remote API endpoint.
+* Retrieve the raw response body as bytes.
+* Parse JSON responses into Python dictionaries and lists.
+* Encapsulate request logic in a reusable `GetRequester` class.
+* Well-documented code with comments explaining the purpose and logic of each method.
 
-### Set Up
+## Technologies Used
 
-Before we begin coding, let's complete the initial setup for this lesson: 
+* Python 3
+* Requests
+* JSON
+* Pytest
 
-* Fork and Clone
-  * For this lesson, you will need the following GitHub Repo:
-  * Go to the provided GitHub repository link.
-  * Fork the repository to your GitHub account.
-  * Clone the forked repository to your local machine.
-* Open and Run File
-  * Open the project in VSCode.
-  * Run pipenv install to install all necessary dependencies.
-  * Run pipenv shell to open instance of python shell
+## Project Structure
 
-### Task 1: Define the Problem
+```text
+flask-getting-remote-data-lab/
+├── lib/
+│   ├── GetRequester.py
+│   └── testing/
+├── Pipfile
+├── Pipfile.lock
+├── pytest.ini
+└── README.md
+```
 
-* Build a class to interact with api
-* Get the data
-* Convert to json data
+## Installation
 
-### Task 2: Determine the Design
+1. Clone the repository.
 
-* Endpoint: https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json.
-  * ```get_response_body```
-    * Query endpoint
-  * ```load_json```
-    * Convert to json data
+```bash
+git clone git@github.com:wanja-juma/flask-getting-remote-data-lab.git
+```
 
-#### Task 3: Develop, Test, and Refine the Code
+2. Navigate to the project directory.
 
-* Create feature branch
-* Build get_response_body to query endpoint
-* Convert endpoint data to json and return the data
-* Push feature branch and open a PR on GitHub
-* Merge to main
+```bash
+cd flask-getting-remote-data-lab
+```
 
-#### Task 4: Document and Maintain
+3. Install the project dependencies.
 
-Best Practice documentation steps:
-* Add comments to code to explain purpose and logic, clarifying intent / functionality of code to other developers.
-* Add screenshot of completed work included in Markdown in README.
-* Update README text to reflect the functionality of the application following https://makeareadme.com.
-* Delete any stale branches on GitHub
-* Remove unnecessary/commented out code
-* If needed, update git ignore to remove sensitive data
+```bash
+pipenv install
+```
 
-## Submission
+4. Activate the virtual environment.
 
-Once all tests are passing and working code is pushed to the GitHub main branch, submit your GitHub repo through Canvas using CodeGrade.
+```bash
+pipenv shell
+```
 
-## Grading Criteria
+## Usage
 
-The application passes all test suites.
-* Get json data
-* Convert to Json
+Import the `GetRequester` class and provide the URL of the remote endpoint.
+
+```python
+from lib.GetRequester import GetRequester
+
+url = "https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json"
+
+requester = GetRequester(url)
+```
+
+### Retrieve the Raw Response Body
+
+The `get_response_body()` method sends an HTTP GET request and returns the response body as bytes.
+
+```python
+response = requester.get_response_body()
+print(response)
+```
+
+### Load JSON Data
+
+The `load_json()` method retrieves the response body and converts the JSON into native Python data structures.
+
+```python
+data = requester.load_json()
+print(data)
+```
+
+## Remote Endpoint
+
+The application retrieves employee data from the following endpoint:
+
+```text
+https://learn-co-curriculum.github.io/json-site-example/endpoints/people.json
+```
+
+## Running the Tests
+
+Execute the test suite using Pytest:
+
+```bash
+pytest
+```
+
+A successful run should report all tests passing.
+
+## Display Screenshot
+
+Screenshot 2026-07-02 023358.png
+
+## Example Workflow
+
+1. Create a `GetRequester` instance with the endpoint URL.
+2. Call `get_response_body()` to retrieve the raw response.
+3. Call `load_json()` to convert the JSON response into Python objects.
+4. Use the returned data in your Flask application, templates, or other Python code.
+
+## Author
+
+Ruth Juma
